@@ -1,28 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { HeartIcon, ShoppingCart } from "lucide-react";
 
 const Navigation: React.FC = () => {
   return (
     <nav className="bg-white shadow-md p-4 flex justify-between items-center">
       <div className="flex items-center space-x-4">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="text-gray-800 hover:text-gray-600 font-bold text-xl"
         >
           E-Comm
-        </a>
-        <a href="/" className="text-gray-800 hover:text-gray-600">
+        </Link>
+        <Link to="/" className="text-gray-800 hover:text-gray-600">
           Home
-        </a>
-        <a href="/shop" className="text-gray-800 hover:text-gray-600">
+        </Link>
+        <Link to="/shop" className="text-gray-800 hover:text-gray-600">
           Shop
-        </a>
-        <a href="/about" className="text-gray-800 hover:text-gray-600">
+        </Link>
+        <Link to="/about" className="text-gray-800 hover:text-gray-600">
           About
-        </a>
-        <a href="/contact" className="text-gray-800 hover:text-gray-600">
+        </Link>
+        <Link to="/contact" className="text-gray-800 hover:text-gray-600">
           Contact
-        </a>
+        </Link>
       </div>
       <div className="flex items-center space-x-4">
         <input

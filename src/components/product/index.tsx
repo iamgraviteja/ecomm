@@ -2,7 +2,10 @@ import { ProductProps } from "../../types/app.types";
 
 export const Product: React.FC<ProductProps> = ({ product }) => {
   return (
-    <div key={product.id} className="border p-4 rounded-lg shadow-md">
+    <div
+      key={product.id}
+      className="border border-cyan-300 p-4 rounded-lg shadow-md"
+    >
       <img
         src={product.image}
         alt={product.name}
