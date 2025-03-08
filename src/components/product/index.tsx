@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ProductProps } from "../../types/app.types";
 import { RootState } from "../../store";
+import { HeartIcon, ShoppingCartIcon } from "lucide-react";
 
 export const Product: React.FC<ProductProps> = ({ product }) => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
@@ -8,17 +9,25 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
   return (
     <div
       key={product.id}
-      className={`p-4 rounded-lg shadow-lg flex flex-col justify-between ${
+      className={`p-4 rounded-xl shadow-lg flex flex-col justify-between ${
         isDarkMode ? "dark:shadow-2xl dark:bg-gray-800" : ""
       }`}
     >
       <div>
-        <img
-          loading="lazy"
-          src={product.image}
-          alt={product.title}
-          className="w-full h-48 object-contain mb-4 rounded"
-        />
+        <div className="relative">
+          <img
+            loading="lazy"
+            src={product.image}
+            alt={product.title}
+            className="w-full h-48 object-contain mb-4 rounded"
+          />
+          <HeartIcon
+            size={20}
+            className={`cursor-pointer absolute top-2 right-2 ${
+              isDarkMode ? "dark:text-gray-300" : "text-gray-700"
+            }`}
+          />
+        </div>
         <h4
           className={`text-md font-semibold mb-2 capitalize ${
             isDarkMode ? "dark:text-gray-300" : ""
@@ -41,21 +50,13 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
         >
           ${product.price}
         </span>
-        <div className="flex space-x-2">
-          <button
-            className={`bg-blue-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-blue-600 ${
-              isDarkMode ? "dark:bg-blue-700 dark:hover:bg-blue-800" : ""
+        <div className="flex space-x-2 items-center mb-4">
+          <ShoppingCartIcon
+            size={20}
+            className={`cursor-pointer ${
+              isDarkMode ? "dark:text-gray-300" : "text-gray-700"
             }`}
-          >
-            Add to Cart
-          </button>
-          <button
-            className={`bg-gray-500 text-white px-4 py-2 rounded cursor-pointer hover:bg-gray-600 ${
-              isDarkMode ? "dark:bg-gray-700 dark:hover:bg-gray-800" : ""
-            }`}
-          >
-            Wishlist
-          </button>
+          />
         </div>
       </div>
     </div>

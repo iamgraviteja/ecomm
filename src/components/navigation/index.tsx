@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { HeartIcon, ShoppingCart, User } from "lucide-react";
+import { HeartIcon, ShoppingBagIcon, UserIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { useEffect, useState } from "react";
@@ -39,17 +39,20 @@ const Navigation: React.FC = () => {
           : "bg-white shadow-md border-gray-200"
       }`}
     >
-      <div className="flex items-center space-x-16">
+      <div className="flex items-center space-x-8">
         <div className="w-48">
           <NavLink
             to="/"
-            className={`font-bold text-xl ${
+            className={`font-bold text-2xl ${
               isDarkMode
                 ? "text-white hover:text-gray-400"
                 : "text-gray-800 hover:text-gray-600"
             }`}
+            style={{
+              textShadow: "2px 2px 0 #000, 4px 4px 0 #555, 6px 6px 0 #aaa",
+            }}
           >
-            E-Comm
+            Volt Buy
           </NavLink>
         </div>
         <NavLink
@@ -153,7 +156,7 @@ const Navigation: React.FC = () => {
               : "text-gray-800 hover:text-gray-600"
           }`}
         >
-          <ShoppingCart size={24} />
+          <ShoppingBagIcon size={24} />
         </a>
         <div className="relative">
           <button
@@ -164,7 +167,7 @@ const Navigation: React.FC = () => {
                 : "text-gray-800 hover:text-gray-600"
             }`}
           >
-            <User size={24} />
+            <UserIcon size={24} />
           </button>
           {isMenuOpen && (
             <div

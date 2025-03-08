@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
-import { fetchProducts } from "../../../store/reducers/productsSlice";
+import {
+  fetchProducts,
+  clearStore,
+} from "../../../store/reducers/productsSlice";
 import { Product } from "../../../components/product";
 import { useSelector } from "react-redux";
+import Loader from "../../../components/loader";
 
 const Sales = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -16,12 +20,12 @@ const Sales = () => {
   useEffect(() => {
     dispatch(fetchProducts());
     return () => {
-      console.log("Sales component unmounted");
+      dispatch(clearStore());
     };
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
