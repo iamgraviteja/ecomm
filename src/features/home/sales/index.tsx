@@ -1,5 +1,10 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../../../store";
+import { fetchProducts } from "../../../store/reducers/productsSlice"; // Adjust the import path as necessary
 import { Product } from "../../../components/product";
 import { IProduct } from "../../../types/app.types";
+import { useSelector } from "react-redux";
 
 const Sales = () => {
   const products: IProduct[] = [
@@ -49,9 +54,29 @@ const Sales = () => {
     },
   ];
 
+  const { isDarkMode } = useSelector((state: RootState) => state.theme);
+
+  const dispatch: AppDispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+    return () => {
+      console.log("Sales component unmounted");
+    };
+  }, [dispatch]);
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Sales</h1>
+    <div
+      className={`container mx-auto p-4 ${
+        isDarkMode ? "bg-gray-800" : "bg-white"
+      }`}
+    >
+      <h1
+        className={`text-2xl font-bold mb-4 ${
+          isDarkMode ? "text-gray-100" : "text-gray-900"
+        }`}
+      >
+        Sales
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
           <Product key={product.id} product={product} />
