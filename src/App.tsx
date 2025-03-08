@@ -1,6 +1,4 @@
-import "./App.css";
-
-import { Route,Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Navigation from "./components/navigation";
 import About from "./features/about";
