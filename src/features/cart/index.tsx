@@ -30,7 +30,7 @@ const Cart = () => {
         >
           Your Cart
         </h1>
-        {items.length && (
+        {items.length ? (
           <button
             onClick={handleClearCart}
             className={`bg-blue-500 text-white px-4 py-2 rounded ${
@@ -39,7 +39,7 @@ const Cart = () => {
           >
             Clear Cart
           </button>
-        )}
+        ) : null}
       </div>
 
       <div>

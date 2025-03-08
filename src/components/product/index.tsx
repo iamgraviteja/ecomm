@@ -4,14 +4,20 @@ import { useDispatch } from "react-redux";
 
 import { RootState } from "../../store";
 import { addToCart } from "../../store/reducers/cartSlice";
+import { toggleItem } from "../../store/reducers/wishlistSlice";
 import { Product, ProductProps } from "../../types/app.types";
 
 export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
+  const { items } = useSelector((state: RootState) => state.wishlist);
   const dispatch = useDispatch();
 
   const handleAddToCart = (product: Product) => {
     dispatch(addToCart(product));
+  };
+
+  const handleAddToWishlist = (product: Product) => {
+    dispatch(toggleItem(product.id));
   };
 
   return (
@@ -29,12 +35,22 @@ export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
             alt={product.title}
             className="w-full h-48 object-contain mb-4 rounded"
           />
-          <HeartIcon
-            size={20}
-            className={`cursor-pointer absolute top-2 right-2 ${
-              isDarkMode ? "dark:text-gray-300" : "text-gray-700"
-            }`}
-          />
+          {items.includes(product.id) ? (
+            <HeartIcon
+              onClick={() => handleAddToWishlist(product)}
+              size={20}
+              fill="#ff0000"
+              className="cursor-pointer absolute top-2 right-2 text-red-500"
+            />
+          ) : (
+            <HeartIcon
+              onClick={() => handleAddToWishlist(product)}
+              size={20}
+              className={`cursor-pointer absolute top-2 right-2 ${
+                isDarkMode ? "dark:text-gray-300" : "text-gray-700"
+              } hover:fill-red-500 hover:text-red-500`}
+            />
+          )}
         </div>
         <h4
           className={`text-md font-semibold mb-2 capitalize ${
