@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
 import { HeartIcon, ShoppingBagIcon, UserIcon } from "lucide-react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import { RootState } from "../../store";
 
 const Navigation: React.FC = () => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
@@ -148,8 +149,8 @@ const Navigation: React.FC = () => {
         >
           <HeartIcon size={24} />
         </a>
-        <a
-          href="/cart"
+        <NavLink
+          to="/cart"
           className={`${
             isDarkMode
               ? "text-white hover:text-gray-400"
@@ -157,7 +158,7 @@ const Navigation: React.FC = () => {
           }`}
         >
           <ShoppingBagIcon size={24} />
-        </a>
+        </NavLink>
         <div className="relative">
           <button
             onClick={handleMenuToggle}

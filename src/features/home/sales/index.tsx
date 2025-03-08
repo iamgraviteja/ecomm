@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+import Loader from "../../../components/loader";
+import { ProductComponent } from "../../../components/product";
 import { AppDispatch, RootState } from "../../../store";
 import {
-  fetchProducts,
   clearStore,
+  fetchProducts,
 } from "../../../store/reducers/productsSlice";
-import { Product } from "../../../components/product";
-import { useSelector } from "react-redux";
-import Loader from "../../../components/loader";
 
 const Sales = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -43,11 +44,11 @@ const Sales = () => {
           isDarkMode ? "text-gray-100" : "text-gray-900"
         }`}
       >
-        Sales
+        On Sale
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <Product key={product.id} product={product} />
+          <ProductComponent key={product.id} product={product} />
         ))}
       </div>
     </div>

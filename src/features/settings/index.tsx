@@ -1,5 +1,6 @@
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+
 import { RootState } from "../../store";
 import { toggleTheme } from "../../store/reducers/themeSlice";
 

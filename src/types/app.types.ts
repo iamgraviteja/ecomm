@@ -11,7 +11,17 @@ export interface Product {
       count: number;
   };
 }
-
   export interface ProductProps {
     product: Product;
   }
+
+
+export type CartProduct = Product & {    
+  quantity: number;
+};
+
+export interface CartState {
+  items: CartProduct[];
+  total: number;
+  totalItems: number;
+}

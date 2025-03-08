@@ -1,10 +1,18 @@
-import { useSelector } from "react-redux";
-import { ProductProps } from "../../types/app.types";
-import { RootState } from "../../store";
 import { HeartIcon, ShoppingCartIcon } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-export const Product: React.FC<ProductProps> = ({ product }) => {
+import { RootState } from "../../store";
+import { addToCart } from "../../store/reducers/cartSlice";
+import { Product, ProductProps } from "../../types/app.types";
+
+export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div
@@ -52,6 +60,7 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
         </span>
         <div className="flex space-x-2 items-center mb-4">
           <ShoppingCartIcon
+            onClick={() => handleAddToCart(product)}
             size={20}
             className={`cursor-pointer ${
               isDarkMode ? "dark:text-gray-300" : "text-gray-700"

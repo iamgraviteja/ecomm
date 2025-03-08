@@ -1,12 +1,15 @@
-import { Routes, Route } from "react-router-dom";
 import "./App.css";
+
+import { Route,Routes } from "react-router-dom";
+
 import Navigation from "./components/navigation";
-import Home from "./features/home";
-import Contact from "./features/contact";
 import About from "./features/about";
-import SignUp from "./features/signup";
-import Shop from "./features/shop";
+import Cart from "./features/cart";
+import Contact from "./features/contact";
+import Home from "./features/home";
 import Settings from "./features/settings";
+import Shop from "./features/shop";
+import SignUp from "./features/signup";
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </>
   );
