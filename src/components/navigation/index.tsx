@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { RootState } from "../../store";
+import AccountDropdown from "../accountDropdown";
 
 const Navigation: React.FC = () => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
@@ -15,7 +16,10 @@ const Navigation: React.FC = () => {
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (event.target instanceof Element && !event.target.closest(".relative")) {
+    if (
+      event.target instanceof Element &&
+      !event.target.closest(".user-menu")
+    ) {
       setIsMenuOpen(false);
     }
   };
@@ -48,9 +52,11 @@ const Navigation: React.FC = () => {
               isDarkMode
                 ? "text-white hover:text-gray-400"
                 : "text-gray-800 hover:text-gray-600"
-            }`}
+            } transition-shadow duration-300 ease-in-out hover:shadow-lg`}
             style={{
-              textShadow: "2px 2px 0 #000, 4px 4px 0 #555, 6px 6px 0 #aaa",
+              textShadow: isDarkMode
+                ? "2px 2px 0 #000, 4px 4px 0 #333, 6px 6px 0 #666"
+                : "2px 2px 0 #aaa, 4px 4px 0 #555, 6px 6px 0 #000",
             }}
           >
             Volt Buy
@@ -159,66 +165,20 @@ const Navigation: React.FC = () => {
         >
           <ShoppingBagIcon size={24} />
         </NavLink>
-        <div className="relative">
+        <div className="relative h-[24px] user-menu">
           <button
             onClick={handleMenuToggle}
+            aria-haspopup="true"
+            aria-expanded={isMenuOpen}
             className={`cursor-pointer ${
               isDarkMode
-                ? "text-white hover:text-gray-400"
-                : "text-gray-800 hover:text-gray-600"
+                ? "text-white hover:text-gray-400 focus:ring-gray-500"
+                : "text-gray-800 hover:text-gray-600 focus:ring-blue-500"
             }`}
           >
             <UserIcon size={24} />
           </button>
-          {isMenuOpen && (
-            <div
-              className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-2 ${
-                isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
-              }`}
-              style={{ backdropFilter: "blur(10px)" }}
-            >
-              <a
-                href="/profile"
-                className={`block px-4 py-2 ${
-                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                }`}
-              >
-                Profile
-              </a>
-              <a
-                href="/orders"
-                className={`block px-4 py-2 ${
-                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                }`}
-              >
-                Orders
-              </a>
-              <NavLink
-                to="/settings"
-                className={`block px-4 py-2 ${
-                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                }`}
-              >
-                Settings
-              </NavLink>
-              <a
-                href="/help"
-                className={`block px-4 py-2 ${
-                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                }`}
-              >
-                Help
-              </a>
-              <a
-                href="/logout"
-                className={`block px-4 py-2 ${
-                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
-                }`}
-              >
-                Logout
-              </a>
-            </div>
-          )}
+          {isMenuOpen && <AccountDropdown />}
         </div>
       </div>
     </nav>

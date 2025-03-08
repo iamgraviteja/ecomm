@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import Navigation from "./components/navigation";
+import NotFound from "./components/notFound";
 import About from "./features/about";
 import Cart from "./features/cart";
 import Contact from "./features/contact";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
