@@ -6,6 +6,7 @@ import Contact from "./features/contact";
 import About from "./features/about";
 import SignUp from "./features/signup";
 import Shop from "./features/shop";
+import Settings from "./features/settings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
     </>
   );

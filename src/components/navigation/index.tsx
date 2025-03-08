@@ -1,13 +1,39 @@
 import { NavLink } from "react-router-dom";
-import { HeartIcon, ShoppingCart } from "lucide-react";
+import { HeartIcon, ShoppingCart, User } from "lucide-react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useEffect, useState } from "react";
 
 const Navigation: React.FC = () => {
-  const { isDarkMode } = useSelector((state: any) => state.theme);
+  const { isDarkMode } = useSelector((state: RootState) => state.theme);
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (event.target instanceof Element && !event.target.closest(".relative")) {
+      setIsMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   return (
     <nav
-      className={`p-4 flex justify-between items-center border-b-2 ${
+      className={`sticky top-0 z-50 p-4 flex justify-between items-center border-b-2 ${
         isDarkMode
           ? "bg-gray-800 shadow-lg border-gray-700"
           : "bg-white shadow-md border-gray-200"
@@ -99,7 +125,7 @@ const Navigation: React.FC = () => {
           Contact
         </NavLink>
       </div>
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center justify-center space-x-4">
         <input
           type="text"
           placeholder="Search"
@@ -129,6 +155,67 @@ const Navigation: React.FC = () => {
         >
           <ShoppingCart size={24} />
         </a>
+        <div className="relative">
+          <button
+            onClick={handleMenuToggle}
+            className={`cursor-pointer ${
+              isDarkMode
+                ? "text-white hover:text-gray-400"
+                : "text-gray-800 hover:text-gray-600"
+            }`}
+          >
+            <User size={24} />
+          </button>
+          {isMenuOpen && (
+            <div
+              className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg py-2 ${
+                isDarkMode ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+              }`}
+              style={{ backdropFilter: "blur(10px)" }}
+            >
+              <a
+                href="/profile"
+                className={`block px-4 py-2 ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+              >
+                Profile
+              </a>
+              <a
+                href="/orders"
+                className={`block px-4 py-2 ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+              >
+                Orders
+              </a>
+              <NavLink
+                to="/settings"
+                className={`block px-4 py-2 ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+              >
+                Settings
+              </NavLink>
+              <a
+                href="/help"
+                className={`block px-4 py-2 ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+              >
+                Help
+              </a>
+              <a
+                href="/logout"
+                className={`block px-4 py-2 ${
+                  isDarkMode ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                }`}
+              >
+                Logout
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

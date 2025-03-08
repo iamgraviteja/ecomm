@@ -1,36 +1,39 @@
 import { useSelector } from "react-redux";
 import { ProductProps } from "../../types/app.types";
+import { RootState } from "../../store";
 
 export const Product: React.FC<ProductProps> = ({ product }) => {
-  const { isDarkMode } = useSelector((state: any) => state.theme);
+  const { isDarkMode } = useSelector((state: RootState) => state.theme);
 
   return (
     <div
       key={product.id}
-      className={`p-4 rounded-lg shadow-lg flex flex-col justify-between h-full ${
+      className={`p-4 rounded-lg shadow-lg flex flex-col justify-between ${
         isDarkMode ? "dark:shadow-2xl dark:bg-gray-800" : ""
       }`}
     >
       <div>
         <img
+          loading="lazy"
           src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover mb-4 rounded"
+          alt={product.title}
+          className="w-full h-48 object-contain mb-4 rounded"
         />
-        <h2
-          className={`text-xl font-semibold mb-2 ${
-            isDarkMode ? "dark:text-white" : ""
-          }`}
-        >
-          {product.name}
-        </h2>
-        <p
-          className={`text-gray-700 mb-4 ${
+        <h4
+          className={`text-md font-semibold mb-2 capitalize ${
             isDarkMode ? "dark:text-gray-300" : ""
           }`}
         >
-          {product.description}
-        </p>
+          {product.brand}
+        </h4>
+        <h2
+          className={`text-sm font-semibold mb-2 line-clamp-2 ${
+            isDarkMode ? "dark:text-white" : ""
+          }`}
+          title={product.title}
+        >
+          {product.title}
+        </h2>
       </div>
       <div className="flex justify-between items-center mt-auto">
         <span
