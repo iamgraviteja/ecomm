@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,7 +20,7 @@ function App() {
       <Navigation />
       <div
         className={`p-4 min-h-screen ${
-          isDarkMode ? "bg-gray-800" : "bg-gray-100"
+          isDarkMode ? "bg-gray-950" : "bg-gray-100"
         }`}
       >
         <Routes>

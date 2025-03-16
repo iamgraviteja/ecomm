@@ -1,20 +1,16 @@
-import { HeartIcon, ShoppingCartIcon } from "lucide-react";
+import { HeartIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { RootState } from "../../store";
-import { addToCart } from "../../store/reducers/cartSlice";
 import { toggleItem } from "../../store/reducers/wishlistSlice";
 import { Product, ProductProps } from "../../types/app.types";
+import { AddToCartButton } from "../addToCart";
 
 export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
   const { items } = useSelector((state: RootState) => state.wishlist);
   const dispatch = useDispatch();
-
-  const handleAddToCart = (product: Product) => {
-    dispatch(addToCart(product));
-  };
 
   const handleAddToWishlist = (product: Product) => {
     dispatch(toggleItem(product));
@@ -26,7 +22,7 @@ export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
     <div
       key={product.id}
       className={`p-4 rounded-xl shadow-lg flex flex-col justify-between ${
-        isDarkMode ? "dark:shadow-2xl dark:bg-gray-800" : ""
+        isDarkMode ? "shadow-2xl bg-gray-800" : "bg-white"
       }`}
     >
       <div>
@@ -70,20 +66,14 @@ export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
           {product.title}
         </h2>
       </div>
-      <div className="flex justify-between items-center mt-auto">
+      <div className="flex justify-between items-center mt-2">
         <span
           className={`text-lg font-bold ${isDarkMode ? "dark:text-white" : ""}`}
         >
           ${product.price}
         </span>
-        <div className="flex space-x-2 items-center mb-4">
-          <ShoppingCartIcon
-            onClick={() => handleAddToCart(product)}
-            size={20}
-            className={`cursor-pointer ${
-              isDarkMode ? "dark:text-gray-300" : "text-gray-700"
-            }`}
-          />
+        <div className="flex space-x-2 items-center">
+          <AddToCartButton product={product} />
         </div>
       </div>
     </div>

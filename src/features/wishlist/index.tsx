@@ -28,7 +28,7 @@ const WishList = () => {
           <div
             key={product.id}
             className={`p-4 rounded-xl shadow-lg flex flex-col justify-between ${
-              isDarkMode ? "dark:shadow-2xl dark:bg-gray-800" : ""
+              isDarkMode ? "shadow-2xl bg-gray-800" : "bg-white"
             }`}
           >
             <div>

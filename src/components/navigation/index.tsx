@@ -1,4 +1,4 @@
-import { HeartIcon, ShoppingBagIcon, UserIcon } from "lucide-react";
+import { HeartIcon, ShoppingCart, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -8,6 +8,7 @@ import AccountDropdown from "../accountDropdown";
 
 const Navigation: React.FC = () => {
   const { isDarkMode } = useSelector((state: RootState) => state.theme);
+  const totalItems = useSelector((state: RootState) => state.cart.totalItems);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -155,16 +156,27 @@ const Navigation: React.FC = () => {
         >
           <HeartIcon size={24} />
         </NavLink>
-        <NavLink
-          to="/cart"
-          className={`${
-            isDarkMode
-              ? "text-white hover:text-gray-400"
-              : "text-gray-800 hover:text-gray-600"
-          }`}
-        >
-          <ShoppingBagIcon size={24} />
-        </NavLink>
+        <div className="relative">
+          <NavLink
+            to="/cart"
+            className={`${
+              isDarkMode
+                ? "text-white hover:text-gray-400"
+                : "text-gray-800 hover:text-gray-600"
+            }`}
+          >
+            <ShoppingCart size={24} />
+          </NavLink>
+          {totalItems ? (
+            <span
+              className={`absolute -top-2 -right-2 text-xs font-bold rounded-full px-2 py-1 ${
+                isDarkMode ? "bg-red-600 text-white" : "bg-red-500 text-white"
+              }`}
+            >
+              {totalItems}
+            </span>
+          ) : null}
+        </div>
         <div className="relative h-[24px] user-menu">
           <button
             onClick={handleMenuToggle}
