@@ -1,4 +1,4 @@
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
@@ -28,7 +28,7 @@ const Cart = () => {
             isDarkMode ? "text-gray-100" : "text-gray-900"
           }`}
         >
-          Your Bag
+          Your Cart
         </h1>
         {items.length ? (
           <button
@@ -45,7 +45,7 @@ const Cart = () => {
       <div>
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
-            <ShoppingBag
+            <ShoppingCart
               name="shopping-cart"
               className={`w-16 h-16 mb-4 ${
                 isDarkMode ? "text-gray-400" : "text-gray-600"
@@ -56,7 +56,7 @@ const Cart = () => {
                 isDarkMode ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              Your bag is empty.
+              Your cart is empty.
             </p>
           </div>
         ) : (

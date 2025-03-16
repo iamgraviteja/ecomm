@@ -156,17 +156,15 @@ const Navigation: React.FC = () => {
         >
           <HeartIcon size={24} />
         </NavLink>
-        <div className="relative">
-          <NavLink
-            to="/cart"
-            className={`${
-              isDarkMode
-                ? "text-white hover:text-gray-400"
-                : "text-gray-800 hover:text-gray-600"
-            }`}
-          >
-            <ShoppingCart size={24} />
-          </NavLink>
+        <NavLink
+          to="/cart"
+          className={`relative ${
+            isDarkMode
+              ? "text-white hover:text-gray-400"
+              : "text-gray-800 hover:text-gray-600"
+          }`}
+        >
+          <ShoppingCart size={24} />
           {totalItems ? (
             <span
               className={`absolute -top-2 -right-2 text-xs font-bold rounded-full px-2 py-1 ${
@@ -176,7 +174,7 @@ const Navigation: React.FC = () => {
               {totalItems}
             </span>
           ) : null}
-        </div>
+        </NavLink>
         <div className="relative h-[24px] user-menu">
           <button
             onClick={handleMenuToggle}
