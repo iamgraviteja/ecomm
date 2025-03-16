@@ -145,8 +145,8 @@ const Navigation: React.FC = () => {
               : "border-gray-300"
           }`}
         />
-        <a
-          href="/wishlist"
+        <NavLink
+          to="/wishlist"
           className={`${
             isDarkMode
               ? "text-white hover:text-gray-400"
@@ -154,7 +154,7 @@ const Navigation: React.FC = () => {
           }`}
         >
           <HeartIcon size={24} />
-        </a>
+        </NavLink>
         <NavLink
           to="/cart"
           className={`${

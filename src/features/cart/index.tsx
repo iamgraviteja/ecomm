@@ -28,7 +28,7 @@ const Cart = () => {
             isDarkMode ? "text-gray-100" : "text-gray-900"
           }`}
         >
-          Your Cart
+          Your Bag
         </h1>
         {items.length ? (
           <button

@@ -17,8 +17,10 @@ export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
   };
 
   const handleAddToWishlist = (product: Product) => {
-    dispatch(toggleItem(product.id));
+    dispatch(toggleItem(product));
   };
+
+  const isInWishlist = items.some((item) => item.id === product.id);
 
   return (
     <div
@@ -35,7 +37,7 @@ export const ProductComponent: React.FC<ProductProps> = ({ product }) => {
             alt={product.title}
             className="w-full h-48 object-contain mb-4 rounded"
           />
-          {items.includes(product.id) ? (
+          {isInWishlist ? (
             <HeartIcon
               onClick={() => handleAddToWishlist(product)}
               size={20}

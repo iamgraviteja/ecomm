@@ -1,5 +1,5 @@
 import { MoonIcon, SunIcon } from "lucide-react";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { RootState } from "../../store";
 import { toggleTheme } from "../../store/reducers/themeSlice";
@@ -13,11 +13,7 @@ const Settings = () => {
   };
 
   return (
-    <div
-      className={`p-4 min-h-screen ${
-        isDarkMode ? "bg-gray-800" : "bg-gray-100"
-      }`}
-    >
+    <>
       <h1
         className={`text-2xl font-bold mb-4 ${
           isDarkMode ? "text-gray-100" : "text-gray-900"
@@ -40,7 +36,7 @@ const Settings = () => {
           {isDarkMode ? <MoonIcon /> : <SunIcon />}
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
